@@ -17,6 +17,8 @@ import CivilHub from './pages/M6_RegistroCiviles/CivilHub';
 import NovedadesHub from './pages/M7_Novedades/NovedadesHub';
 import OperacionesHub from './pages/M8_RegistroOperaciones/OperacionesHub';
 import PersonalHub from './pages/M9_RegistroPersonal/PersonalHub';
+import ReportesHub from './pages/M3_InformesReportes/ReportesHub';
+import MediosTransporteHub from './pages/M10_MedioTransporte/MediosTransporteHub';
 
 
 export default function App() {
@@ -43,6 +45,8 @@ export default function App() {
         <Route path="/novedades" element={<NovedadesHub />} />
         <Route path="/operaciones" element={<OperacionesHub />} />
         <Route path="/personal" element={<PersonalHub />} />
+        <Route path="/reportes" element={<ReportesHub />} />
+        <Route path="/medios-transporte" element={<MediosTransporteHub />} />
 
 
 

@@ -25,7 +25,17 @@ public class TokenService : ITokenService
         var settings   = _config.GetSection("JwtSettings");
         var key        = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings["SecretKey"]!));
         var creds      = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var expiration = DateTime.UtcNow.AddMinutes(double.Parse(settings["AccessTokenExpirationMinutes"]!));
+        
+        // ── CONTROL DE EXPIRACIÓN AMPLIADO PARA DESARROLLO ──
+        // Si quieres cambiarlo dinámicamente, lee el appsettings, si no, usa 480 minutos (8 horas)
+        double minutosExpiracion = double.TryParse(settings["AccessTokenExpirationMinutes"], out var mins) ? mins : 30;
+        
+#if DEBUG
+        // Mientras compiles en modo Debug (desarrollo), dale 8 horas de vida al token
+        minutosExpiracion = 480; 
+#endif
+
+        var expiration = DateTime.UtcNow.AddMinutes(minutosExpiracion);
 
         var claims = new[]
         {
@@ -33,7 +43,7 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
             new Claim(ClaimTypes.Name,               $"{usuario.Nombres} {usuario.Apellidos}"),
             new Claim(ClaimTypes.Role,               usuario.IdRol.ToString()),
-            new Claim("rol_id",                      usuario.IdRol.ToString()),
+            new Claim("rol_id",                      usuario.IdRol.ToString()), // Mapeo para tu front
             new Claim(JwtRegisteredClaimNames.Jti,   Guid.NewGuid().ToString())
         };
 

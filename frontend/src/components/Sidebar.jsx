@@ -48,10 +48,13 @@ export default function Sidebar({ currentPath, isCollapsed, setIsCollapsed }) {
       {/* HEADER CEO-LCC */}
       <div className="h-24 bg-[#060A12] flex flex-col items-center justify-center relative shrink-0 border-b border-white/5">
         <div className="w-10 h-10 mb-1">
-          <svg viewBox="0 0 40 40" fill="none">
+          {/* LOGO CORREGIDO - IGUAL AL DEL TOPBAR */}
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="20" cy="20" r="19" stroke="#FFD100" strokeWidth="1.5" fill="none"/>
             <circle cx="20" cy="20" r="14" stroke="#0057B8" strokeWidth="1" fill="#003087"/>
-            <circle cx="20" cy="20" r="4" fill="#060A12" stroke="#FFD100" strokeWidth="1"/>
+            <path d="M4 20 Q12 14 20 20 Q12 26 4 20Z" fill="#FFD100"/>
+            <path d="M36 20 Q28 14 20 20 Q28 26 36 20Z" fill="#FFD100"/>
+            <circle cx="20" cy="20" r="4" fill="#003087" stroke="#FFD100" strokeWidth="1"/>
           </svg>
         </div>
         {!isCollapsed && (
